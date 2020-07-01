@@ -28,8 +28,9 @@ module Lalamove
       OpenSSL::HMAC.hexdigest('sha256', Lalamove.config.secret_key, raw_signature)
     end
 
-    def self.generate_raw_signature(method, timestamp,path, payload)
-      "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n#{payload}"
+    def self.generate_raw_signature(method, timestamp, path, payload)
+      signature_string = "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n"
+      signature_string << payload if method != 'GET'
     end
 
     def self.get_timestamp
