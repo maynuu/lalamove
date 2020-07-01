@@ -7,7 +7,7 @@ require 'httparty'
 
 module Lalamove
   module Helper
-    def self.request(path, method, payload={})
+    def self.request(path, method, payload=nil)
       timestamp = get_timestamp
       opts = payload.to_json.to_s
       signature = generate_signature(path, method, timestamp, opts)
@@ -29,8 +29,11 @@ module Lalamove
     end
 
     def self.generate_raw_signature(method, timestamp, path, payload)
-      signature_string = "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n"
-      signature_string << payload if method != 'GET'
+      if method == 'GET'
+        "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n"
+      else
+        "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n#{payload}"
+      end
     end
 
     def self.get_timestamp
