@@ -6,7 +6,7 @@ module Lalamove
   # Service
   class API 
     def self.quotation(payload)
-      Helper.request('/v2/quotations', payload, 'POST')
+      Helper.request('/v2/quotations', 'POST', payload)
     end
   end
 end
