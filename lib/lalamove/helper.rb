@@ -29,7 +29,7 @@ module Lalamove
     end
 
     def self.generate_raw_signature(method, timestamp, path, payload)
-      if method == 'GET'
+      if method == 'GET' || method == 'PUT'
         "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n"
       else
         "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n#{payload}"
