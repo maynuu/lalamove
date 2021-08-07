@@ -7,7 +7,7 @@ module Lalamove
     attr_accessor :key, :secret_key, :country_code, :mode, :base_url
   end
 
-  SANDBOX_BASE_URL = 'https://sandbox-rest.lalamove.com'
+  SANDBOX_BASE_URL = 'https://rest.sandbox.lalamove.com'
   PROD_BASE_URL = 'https://rest.lalamove.com'
 
   # Config Module
