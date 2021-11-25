@@ -14,6 +14,10 @@ module Lalamove
         Helper.request("/v2/orders/#{id}", 'GET')
       end
 
+      def self.order_tips(id, payload)
+        Helper.request("/v2/orders/#{id}/tips", 'PUT', payload)
+      end
+
       def self.driver_details(id, driver_id)
         Helper.request("/v2/orders/#{id}/drivers/#{driver_id}", 'GET')
       end
