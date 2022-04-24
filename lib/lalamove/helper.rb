@@ -14,12 +14,13 @@ module Lalamove
       token = get_token(Lalamove.config.key, timestamp, signature)
       headers = get_header(token, timestamp.to_s)
       url = request_url(path)
+      
       if method == 'POST'
         HTTParty.post(url, :headers => headers, :body => opts)
-      elsif method == 'GET'
-        HTTParty.get(url, :headers => headers, :body => opts)
-      else
+      elsif method == 'PUT'
         HTTParty.put(url, :headers => headers, :body => opts)
+      else
+        HTTParty.get(url, :headers => headers)
       end
     end
 
@@ -29,11 +30,7 @@ module Lalamove
     end
 
     def self.generate_raw_signature(method, timestamp, path, payload)
-      if method == 'GET' || method == 'PUT'
-        "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n"
-      else
-        "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n#{payload}"
-      end
+      "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n#{payload}"
     end
 
     def self.get_timestamp
