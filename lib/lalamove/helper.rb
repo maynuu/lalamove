@@ -17,9 +17,9 @@ module Lalamove
       if method == 'POST'
         HTTParty.post(url, :headers => headers, :body => opts)
       elsif method == 'GET'
-        HTTParty.get(url, :headers => headers)
+        HTTParty.get(url, :headers => headers, :body => opts)
       else
-        HTTParty.put(url, :headers => headers)
+        HTTParty.put(url, :headers => headers, :body => opts)
       end
     end
 
