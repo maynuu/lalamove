@@ -30,7 +30,11 @@ module Lalamove
     end
 
     def self.generate_raw_signature(method, timestamp, path, payload)
-      "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n#{payload}"
+      if method == 'GET'
+        "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n"
+      else
+        "#{timestamp}\r\n#{method}\r\n#{path}\r\n\r\n#{payload}"
+      end
     end
 
     def self.get_timestamp
